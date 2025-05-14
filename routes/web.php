@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Models\Todo;
 use App\Models\User;
+use App\Http\Controllers\CategoryController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/todo/{todo}/edit', [TodoController::class, 'edit'])->name('todo.edit');
     // Route::patch('todo/{todo}', [TodoController::class, 'update'])->name('todo.update');
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::post('/todo', [TodoController::class, 'store'])->name('todo.store');
     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -38,5 +42,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::patch('/user/{user}/makeadmin', [UserController::class, 'makeadmin'])->name('user.makeadmin');
     Route::patch('/user/{user}/removeadmin', [UserController::class, 'removeadmin'])->name('user.removeadmin');
 });
-
+Route::resource('category', CategoryController::class);
 require __DIR__ . '/auth.php';

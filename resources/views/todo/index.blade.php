@@ -41,6 +41,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">Title</th>
+                                <th class="px-6 py-3">Category</th>
                                 <th scope="col" class="px-6 py-3">Status</th>
                                 <th scope="col" class="px-6 py-3">Action</th>
                             </tr>
@@ -52,6 +53,16 @@
                                     <a href="{{ route('todo.edit', $data) }}" class="hover:underline text-xs">
                                         {{ $data->title }}
                                     </a>
+                                </td>
+                                <td class="px-6 py-4">
+                                    @if ($data->category)
+                                    <a href="{{ route('category.edit', $data->category->id) }}"
+                                    class="font-medium text-blue-600 dark:text-blue-400 hover:underline">
+                                    {{ $data->category->name }}
+                                </a>
+                                @else
+                                <span class="text-gray-400 italic">No category</span>
+                                @endif
                                 </td>
                                 <td class="px-6 py-4 md:block">
                                     @if ($data->is_done == false)

@@ -1,9 +1,8 @@
 <?php
-
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -16,8 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Seed user admin
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
@@ -27,7 +25,16 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
-        User::factory(100)->create();
-        Todo::factory(500)->create();
+        // Seed random categories
+        $categories = Category::factory(10)->create();
+
+        // Seed random users
+        $users = User::factory(10)->create();
+
+        // Seed random todos, mengaitkan kategori dan pengguna secara acak
+        Todo::factory(10)->create([
+            'user_id' => '1',  // Random user
+            'category_id' => $categories->random()->id,  // Random category
+        ]);
     }
 }

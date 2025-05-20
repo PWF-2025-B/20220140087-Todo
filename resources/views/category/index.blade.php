@@ -39,7 +39,7 @@
                             <tr>
                                 <th scope="col" class="px-6 py-3">No</th>
                                 <th scope="col" class="px-6 py-3">Category Name</th>
-                                <th scope="col" class="px-6 py-3">Todo Name</th>
+                                <th scope="col" class="px-6 py-3">Todo</th>
                                 <th scope="col" class="px-6 py-3 text-center">Actions</th>
                             </tr>
                         </thead>
@@ -55,11 +55,9 @@
                                         </a>
                                     </td>
                                     <td class="px-6 py-4">
-                                        @forelse ($category->todos as $todo)
-                                            <p class="text-sm text-gray-700 dark:text-gray-400">{{ $todo->title }}</p>
-                                        @empty
-                                            <p class="text-sm text-gray-500 dark:text-gray-400">No Todos</p>
-                                        @endforelse
+                                        <p class="text-sm text-gray-700 dark:text-gray-400">
+                                        {{ $category->todos->count() }} Todos
+                                        </p>
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <div class="">

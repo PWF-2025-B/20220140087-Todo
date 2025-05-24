@@ -37,6 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/todo', [TodoController::class, 'store'])->name('todo.store');
     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 });
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');});
+    
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('user', UserController::class)->except(['show']);
     Route::patch('/user/{user}/makeadmin', [UserController::class, 'makeadmin'])->name('user.makeadmin');
